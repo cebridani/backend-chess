@@ -1,0 +1,17 @@
+io\github\cebridani\chesswebapi\service\impl\AuthService.class
+io\github\cebridani\chesswebapi\ChessApiApplication.class
+io\github\cebridani\chesswebapi\repository\RoleRepository.class
+io\github\cebridani\chesswebapi\payload\ErrorDetails.class
+io\github\cebridani\chesswebapi\payload\LoginDto.class
+io\github\cebridani\chesswebapi\utils\PasswordGeneratorEncoder.class
+io\github\cebridani\chesswebapi\exception\ChessAPIException.class
+io\github\cebridani\chesswebapi\payload\RegisterDto.class
+io\github\cebridani\chesswebapi\repository\UserRepository.class
+io\github\cebridani\chesswebapi\exception\GlobalExceptionHandler.class
+io\github\cebridani\chesswebapi\exception\ResourceNotFoundException.class
+io\github\cebridani\chesswebapi\security\CustomUserDetailsService.class
+io\github\cebridani\chesswebapi\entity\Role.class
+io\github\cebridani\chesswebapi\entity\User.class
+io\github\cebridani\chesswebapi\service\impl\AuthServiceImpl.class
+io\github\cebridani\chesswebapi\controller\AuthController.class
+io\github\cebridani\chesswebapi\config\SecurityConfiguration.class
