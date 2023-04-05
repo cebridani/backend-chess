@@ -36,6 +36,8 @@ public class User {
     private String email;
     @Column(nullable = false)
     private String password;
+    @Column(name = "fen", nullable = false, columnDefinition = "VARCHAR(255) default 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'")
+    private String fen;
     
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "users_roles",

@@ -7,9 +7,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.github.cebridani.chesswebapi.payload.JWTAuthResponse;
 import io.github.cebridani.chesswebapi.payload.LoginDto;
 import io.github.cebridani.chesswebapi.payload.RegisterDto;
-import io.github.cebridani.chesswebapi.service.impl.AuthService;
+import io.github.cebridani.chesswebapi.service.AuthService;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -23,8 +24,13 @@ public class AuthController {
 
     // Build Login REST API
     @PostMapping(value = {"/login", "/signin"})
-    public ResponseEntity<String> login(@RequestBody LoginDto loginDto){
-        return authService.login(loginDto);
+    public ResponseEntity<JWTAuthResponse> login(@RequestBody LoginDto loginDto){
+    	String token = authService.login(loginDto);
+
+        JWTAuthResponse jwtAuthResponse = new JWTAuthResponse();
+        jwtAuthResponse.setAccessToken(token);
+
+        return ResponseEntity.ok(jwtAuthResponse);
     }
 
     // Build Register REST API
