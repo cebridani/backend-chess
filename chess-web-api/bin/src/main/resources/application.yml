@@ -10,8 +10,3 @@ spring:
         dialect: org.hibernate.dialect.MySQLDialect
     hibernate:
       ddl-auto: update
-      
-app:
-  jwt-secret: 322ae0b45c7ab2e9b1feedd267dca310e6b07043fe6fc230492fcdbe7fab69b3
-  jwt-expiration: 86400000 # 1 dia en milisegundos
-
