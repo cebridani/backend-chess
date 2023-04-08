@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: backend-chess
-        image: cebridani/backend-chess:v1
+        image: cebridani/backend-chess:latest
         ports:
         - containerPort: 3000
         env:
