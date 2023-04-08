@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-chess
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend-chess
+  template:
+    metadata:
+      labels:
+        app: backend-chess
+    spec:
+      containers:
+      - name: backend-chess
+        image: cebridani/backend-chess:v1
+        ports:
+        - containerPort: 8080
+        env:
+        - name: SPRING_DATASOURCE_URL
+          value: jdbc:mysql://mysql:3306/chess?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+        - name: SPRING_DATASOURCE_USERNAME
+          value: chess
+        - name: SPRING_DATASOURCE_PASSWORD
+          value: root
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-chess
+spec:
+  selector:
+    app: backend-chess
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer
+
