@@ -37,5 +37,17 @@ public class ChessController {
         FenDto fenByUser = chessService.getFenByUser(token);
         return ResponseEntity.ok(fenByUser);
     }
+    
+    @PostMapping("/set_fen")
+    public ResponseEntity<String> setFen(@RequestBody FenDto fenDto, @RequestHeader("Authorization") String token) {
+        chessService.setFenByUser(fenDto, token);
+        return ResponseEntity.ok("Fen setted");
+    }
+    
+    @PostMapping("/top_moves")
+    public ResponseEntity<String> top_moves(@RequestBody FenDto fenDto, @RequestHeader("Authorization") String token) throws JsonMappingException, JsonProcessingException {
+    	String response = chessService.list_best_moves(fenDto, token);
+        return ResponseEntity.ok(response);
+    }
 }
 

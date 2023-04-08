@@ -62,5 +62,35 @@ public class ChessService {
 
         return new FenDto(user.get().getFen()); 
 	}
+
+	public void setFenByUser(FenDto fenDto, String token) {
+		String email = jwtTokenProvider.getUsername(token.substring(7));
+        Optional<User> user = userRepository.findByEmail(email);
+        
+        String newFen = fenDto.getFen();
+        
+        user.get().setFen(newFen);
+        userRepository.save(user.get());        
+        
+	}
+	
+public String list_best_moves(FenDto fenDto, String token) throws JsonMappingException, JsonProcessingException {        
+        
+        String email = jwtTokenProvider.getUsername(token.substring(7));
+        Optional<User> user = userRepository.findByEmail(email);
+
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<FenDto> entity = new HttpEntity<>(fenDto, headers);
+
+        ResponseEntity<String> response = restTemplate.postForEntity("http://127.0.0.1:5000/top_moves", entity, String.class);
+        String responseBody = response.getBody();
+
+
+        System.out.println(responseBody);
+        
+        return responseBody;
+    }
 }
 

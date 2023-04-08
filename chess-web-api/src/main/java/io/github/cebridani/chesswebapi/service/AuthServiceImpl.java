@@ -61,7 +61,7 @@ public class AuthServiceImpl implements AuthService {
 
         // add check for username exists in database
         if(userRepository.existsByUsername(registerDto.getUsername())){
-            throw new ChessAPIException(HttpStatus.BAD_REQUEST, "Username is already exists!.");
+            throw new ChessAPIException(HttpStatus.BAD_REQUEST, "User already exists!.");
         }
 
         // add check for email exists in database
