@@ -5,7 +5,6 @@ pipeline {
         dockerImage = "cebridani/backend-chess"
     }
     stages {
-        
         stage('Build') {
             steps {
                 dir('chess-web-api') {
@@ -13,34 +12,42 @@ pipeline {
                 }
             }
         }
-        
         stage('Docker Build') {
             steps {
                 dir('chess-web-api') {
-                    bat 'docker build -t backend-chess .'
+                    bat 'docker build -t $dockerImage .'
                 }
             }
         }
-        
-        stage('Docker Run') {
+        stage('Docker Push') {
             steps {
-                bat 'docker rm -f backend-chess || true'
-                bat 'docker run -d -p 3000:3000 --name=backend-chess backend-chess'
+                withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                    bat 'docker login -u $DOCKER_USER -p $DOCKER_PASS'
+                    bat 'docker push $dockerImage'
+                }
             }
         }
-        
-        stage('Push to Docker Hub') {
+        stage('Deploy') {
             steps {
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-                        def dockerImage = dockerImage.push()
-                        dockerImage.tag("cebridani/backend-chess:${env.BUILD_NUMBER}", "cebridani/backend-chess:latest")
-                        dockerImage.push("cebridani/backend-chess:${env.BUILD_NUMBER}")
-                        dockerImage.push("cebridani/backend-chess:latest")
+                    def app = 'backend-chess'
+                    def image = dockerImage
+                    def container = "chess-backend"
+                    def label = "app=${app}"
+                    def selector = "app=${app}"
+                    def port = "3000"
+                    
+                    sh "kubectl set image deployment/${container} ${container}=${image}:${BUILD_NUMBER} --record=true"
+                    
+                    timeout(time: 2, unit: 'MINUTES') {
+                        sh "kubectl rollout status deployment/${container}"
                     }
+                    
+                    sh "kubectl patch deployment ${container} -p '{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"${label}\": \"${BUILD_NUMBER}\"}}}}}'"
+                    
+                    sh "kubectl expose deployment/${container} --port=${port} --type=NodePort --labels=${label} --name=${container}-service"
                 }
             }
         }
     }
 }
-
