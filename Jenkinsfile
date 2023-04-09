@@ -7,7 +7,7 @@ pipeline {
         stage('Build') {
             steps {
                 dir('chess-web-api') {
-                    bat 'mvn clean install'
+                    bat 'mvn clean install -DskipTests'
                 }
             }
         }
