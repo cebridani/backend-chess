@@ -30,9 +30,9 @@ pipeline {
         
         stage('Deploy to Kubernetes') {
             steps {
-                environment {
-                    KUBE_NAMESPACE = "chess"
-                    KUBECONFIG = "C:\\Users\\danie\\.kube\\config"
+                script {
+                    env.KUBE_NAMESPACE = "chess"
+                    env.KUBECONFIG = "C:\\Users\\danie\\.kube\\config"
                 }
                 bat '''
                     kubectl config use-context rancher-desktop
