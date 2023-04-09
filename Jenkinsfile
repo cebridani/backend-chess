@@ -33,7 +33,7 @@ pipeline {
         
         stage('Deploy') {
             steps {
-                bat "kubectl config use-context desktop-27atrca"
+                bat "kubectl config use-context rancher-desktop"
                 bat "kubectl rollout restart deployment/myapp-deployment"
                 bat "kubectl rollout status deployment/myapp-deployment"
             }
