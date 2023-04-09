@@ -24,6 +24,19 @@ pipeline {
                 bat 'docker run -d -p 3000:3000 --name=backend-chess backend-chess'
             }
         }
+        stage('Deploy to Kubernetes') {
+            steps {
+                environment {
+                    KUBE_NAMESPACE = "chess"
+                    KUBECONFIG = "C:\\Users\\danie\\.kube\\config"
+                }
+                bat '''
+                    kubectl config use-context rancher-desktop
+                    kubectl config set-context --current --namespace=%KUBE_NAMESPACE%
+                    kubectl apply -f kubernetes-manifest.yaml
+                '''
+            }
+        }
     }
 }
 
