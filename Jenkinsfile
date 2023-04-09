@@ -28,14 +28,17 @@ pipeline {
             }
         }
         
-        stage('Docker Pull') {
-          steps {
-            script {
-              withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                bat 'docker login -u %USERNAME% -p %PASSWORD% && docker pull cebridani/backend-chess:latest'
-              }
+        stage('Push to Docker Hub') {
+            steps {
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                        def dockerImage = dockerImage.push()
+                        dockerImage.tag("cebridani/backend-chess:${env.BUILD_NUMBER}", "cebridani/backend-chess:latest")
+                        dockerImage.push("cebridani/backend-chess:${env.BUILD_NUMBER}")
+                        dockerImage.push("cebridani/backend-chess:latest")
+                    }
+                }
             }
-          }
         }
     }
 }
