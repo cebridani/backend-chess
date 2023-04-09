@@ -37,7 +37,7 @@ pipeline {
                 bat '''
                     kubectl config use-context rancher-desktop
                     kubectl config set-context --current --namespace=%KUBE_NAMESPACE%
-                    kubectl apply -f kubernetes-manifest.yaml
+                    kubectl apply -f deplyment.yaml
                 '''
             }
         }
