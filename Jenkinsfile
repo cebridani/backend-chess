@@ -37,7 +37,8 @@ pipeline {
                 bat "kubectl rollout restart deployment/myapp-deployment"
                 bat "kubectl rollout status deployment/myapp-deployment"
             }
-        }
+        }\
+        
         stage('Clean up') {
             steps {
                 sh 'docker stop backend-chess || true'
