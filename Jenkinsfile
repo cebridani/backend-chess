@@ -33,7 +33,7 @@ pipeline {
         
         stage('Deploy') {
             steps {
-                bat "kubectl config use-context rancher-desktop --kubeconfig=C:\Users\danie\.kube\config"
+                bat "kubectl config use-context rancher-desktop --kubeconfig=C:\\Users\danie\\.kube\\config"
                 bat "kubectl rollout restart deployment/myapp-deployment"
                 bat "kubectl rollout status deployment/myapp-deployment"
             }
