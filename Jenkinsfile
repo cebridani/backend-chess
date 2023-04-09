@@ -33,9 +33,15 @@ pipeline {
         
         stage('Deploy') {
             steps {
-                bat "kubectl config use-context docker-for-desktop"
+                bat "kubectl config use-context desktop-27atrca"
                 bat "kubectl rollout restart deployment/myapp-deployment"
                 bat "kubectl rollout status deployment/myapp-deployment"
+            }
+        }
+        stage('Clean up') {
+            steps {
+                sh 'docker stop backend-chess || true'
+                sh 'docker rm backend-chess || true'
             }
         }
     }
