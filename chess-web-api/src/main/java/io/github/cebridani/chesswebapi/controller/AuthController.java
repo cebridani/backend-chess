@@ -41,7 +41,7 @@ public class AuthController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
     
-    @GetMapping("/hola_mundo")
+    @PostMapping(value = {"/hola_mundo"})
     public String helloWorld() {
         return "Hola Mundo";
     }
