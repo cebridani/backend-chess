@@ -28,18 +28,14 @@ pipeline {
             }
         }
         
-        stage('Deploy to Kubernetes') {
-            steps {
-                script {
-                    env.KUBE_NAMESPACE = "chess"
-                    env.KUBECONFIG = "C:\\Users\\danie\\.kube\\config"
-                }
-                bat '''
-                    kubectl config use-context rancher-desktop
-                    kubectl config set-context --current --namespace=%KUBE_NAMESPACE%
-                    kubectl apply -f deployment.yaml
-                '''
+        stage('Docker Pull') {
+          steps {
+            script {
+              withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                bat 'docker login -u %USERNAME% -p %PASSWORD% && docker pull cebridani/backend-chess:latest'
+              }
             }
+          }
         }
     }
 }
