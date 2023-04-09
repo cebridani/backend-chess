@@ -20,6 +20,7 @@ pipeline {
         }
         stage('Docker Run') {
             steps {
+                bat 'docker rm -f backend-chess || true'
                 bat 'docker run -d -p 3000:3000 --name=backend-chess backend-chess'
             }
         }
