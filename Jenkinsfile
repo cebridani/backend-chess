@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         JAVA_HOME = "C:\\Program Files\\Java\\jdk-17"
-        dockerImage = "cebridani/backend-chess"
+        dockerImage = "cebridani/backend-chess:latest"
     }
     stages {
         
@@ -33,7 +33,8 @@ pipeline {
         
         stage('Deploy') {
             steps {
-                bat "kubectl config use-context rancher-desktop --kubeconfig=C:\\Users\\danie\\.kube\\config"
+                bat "kubectl config use-context minikube"
+                bat "kubectl config set-context minikube --namespace=chess"
                 bat "kubectl rollout restart deployment/backend-chess"
                 bat "kubectl rollout status deployment/backend-chess"
             }
@@ -41,8 +42,8 @@ pipeline {
         
         stage('Clean up') {
             steps {
-                sh 'docker stop backend-chess || true'
-                sh 'docker rm backend-chess || true'
+                bat 'docker stop backend-chess || true'
+                bat 'docker rm backend-chess || true'
             }
         }
     }
