@@ -22,7 +22,7 @@ spec:
         - name: SPRING_DATASOURCE_URL
           value: jdbc:mysql://mysql.chess.svc.cluster.local:3306/chess?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
         - name: SPRING_DATASOURCE_USERNAME
-          value: chess
+          value: root
         - name: SPRING_DATASOURCE_PASSWORD
           value: root
 ---
