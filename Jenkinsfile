@@ -33,10 +33,10 @@ pipeline {
         
         stage('Deploy') {
             steps {
-                bat "kubectl config use-context minikube"
-                bat "kubectl config set-context minikube --namespace=chess"
-                bat "kubectl rollout restart deployment/backend-chess"
-                bat "kubectl rollout status deployment/backend-chess"
+                bat "kubectl config use-context minikube --kubeconfig=C:\\Users\\danie\\.kube\\config"
+                bat "kubectl config set-context minikube --namespace=chess --kubeconfig=C:\\Users\\danie\\.kube\\config"
+                bat "kubectl rollout restart deployment/backend-chess --kubeconfig=C:\\Users\\danie\\.kube\\config"
+                bat "kubectl rollout status deployment/backend-chess --kubeconfig=C:\\Users\\danie\\.kube\\config"
             }
         }
         
