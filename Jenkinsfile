@@ -39,12 +39,5 @@ pipeline {
                 bat "kubectl rollout status deployment/backend-chess --kubeconfig=C:\\Users\\danie\\.kube\\config"
             }
         }
-        
-        stage('Clean up') {
-            steps {
-                bat 'docker stop backend-chess || true'
-                bat 'docker rm backend-chess || true'
-            }
-        }
     }
 }
