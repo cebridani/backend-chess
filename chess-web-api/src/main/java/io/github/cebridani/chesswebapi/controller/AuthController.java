@@ -15,6 +15,7 @@ import io.github.cebridani.chesswebapi.service.AuthService;
 
 @RestController
 @RequestMapping("/api/auth")
+@CrossOrigin(origins = "*")
 public class AuthController {
 
     private AuthService authService;
