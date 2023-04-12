@@ -4,7 +4,7 @@ metadata:
   name: backend-chess
   namespace: chess
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: backend-chess
@@ -17,12 +17,12 @@ spec:
       - name: backend-chess
         image: cebridani/backend-chess:latest
         ports:
-        - containerPort: 3000
+        - containerPort: 80
         env:
         - name: SPRING_DATASOURCE_URL
-          value: jdbc:mysql://mysql.chess.svc.cluster.local:3306/chess?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+          value: jdbc:mysql://mysql:3306/chess?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
         - name: SPRING_DATASOURCE_USERNAME
-          value: root
+          value: chess
         - name: SPRING_DATASOURCE_PASSWORD
           value: root
 ---
@@ -35,14 +35,8 @@ spec:
   selector:
     app: backend-chess
   ports:
-    - name: http
-      protocol: TCP
+    - protocol: TCP
       port: 80
-      targetPort: 3000
-      nodePort: 30000
-    - name: https
-      protocol: TCP
-      port: 443
-      targetPort: 3000
-      nodePort: 30001
-  type: NodePort
+      targetPort: 80
+  type: ClusterIP
+
