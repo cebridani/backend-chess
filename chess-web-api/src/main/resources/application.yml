@@ -16,5 +16,5 @@ app:
   jwt-expiration: 86400000 # 1 dia en milisegundos
   
 server:
-  port: 3000
+  port: 80
 
