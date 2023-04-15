@@ -15,7 +15,7 @@ import io.github.cebridani.chesswebapi.payload.LoginDto;
 import io.github.cebridani.chesswebapi.payload.RegisterDto;
 import io.github.cebridani.chesswebapi.service.AuthService;
 
-@CrossOrigin(origins = "http://http://192.168.49.2:31621")
+@CrossOrigin(origins = "http://http://192.168.49.2:31621/signin")
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
