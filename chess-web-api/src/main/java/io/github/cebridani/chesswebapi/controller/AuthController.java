@@ -17,7 +17,6 @@ import io.github.cebridani.chesswebapi.service.AuthService;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "*")
 public class AuthController {
 
     private AuthService authService;
@@ -27,6 +26,7 @@ public class AuthController {
     }
 
     // Build Login REST API
+    @CrossOrigin
     @PostMapping(value = {"/login", "/signin"})
     public ResponseEntity<JWTAuthResponse> login(@RequestBody LoginDto loginDto){
     	String token = authService.login(loginDto);
