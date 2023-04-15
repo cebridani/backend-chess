@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        JAVA_HOME = "/home/daniel/jdk-17.0.6"
+        JAVA_HOME = "/usr/lib/jvm/java-17-openjdk-amd64"
         dockerImage = "cebridani/backend-chess:latest"
     }
     stages {
