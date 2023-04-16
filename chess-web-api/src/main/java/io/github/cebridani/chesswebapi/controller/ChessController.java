@@ -15,7 +15,6 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import io.github.cebridani.chesswebapi.payload.FenDto;
 import io.github.cebridani.chesswebapi.service.ChessService;
 
-@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/chess")
 public class ChessController {
