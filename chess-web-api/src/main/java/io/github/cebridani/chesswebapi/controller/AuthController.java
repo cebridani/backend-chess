@@ -33,7 +33,7 @@ public class AuthController {
         JWTAuthResponse jwtAuthResponse = new JWTAuthResponse();
         jwtAuthResponse.setAccessToken(token);
         
-        System.out.println("Hola Mundoooo");
+        System.out.println("User login");
 
         return ResponseEntity.ok(jwtAuthResponse);
     }
