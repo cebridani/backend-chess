@@ -34,19 +34,22 @@ public class ChessController {
     
     @GetMapping("/get_fen")
     public ResponseEntity<FenDto> getFen(@RequestHeader("Authorization") String token) {
+        System.out.println("get Fen");
         FenDto fenByUser = chessService.getFenByUser(token);
         return ResponseEntity.ok(fenByUser);
     }
     
     @PostMapping("/set_fen")
     public ResponseEntity<String> setFen(@RequestBody FenDto fenDto, @RequestHeader("Authorization") String token) {
+        System.out.println("set Fen");
         chessService.setFenByUser(fenDto, token);
         return ResponseEntity.ok("Fen setted");
     }
     
     @PostMapping("/top_moves")
     public ResponseEntity<String> top_moves(@RequestBody FenDto fenDto, @RequestHeader("Authorization") String token) throws JsonMappingException, JsonProcessingException {
-    	String response = chessService.list_best_moves(fenDto, token);
+    	System.out.println("top moves");
+        String response = chessService.list_best_moves(fenDto, token);
         return ResponseEntity.ok(response);
     }
 }
