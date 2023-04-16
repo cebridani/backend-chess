@@ -50,7 +50,7 @@ public class SecurityConfiguration {
         http.csrf().disable()
                 .authorizeHttpRequests((authorize) ->
                         //authorize.anyRequest().authenticated()
-                        authorize.requestMatchers("/api/**").permitAll()
+                        authorize.requestMatchers("/**").permitAll()
                                 .anyRequest().authenticated()
 
                 ).exceptionHandling( exception -> exception
