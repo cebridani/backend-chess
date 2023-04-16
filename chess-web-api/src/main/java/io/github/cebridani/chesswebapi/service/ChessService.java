@@ -56,15 +56,17 @@ public class ChessService {
         return responseBody;
     }
 
-	public FenDto getFenByUser(String token) {
-		String email = jwtTokenProvider.getUsername(token.substring(7));
+    public FenDto getFenByUser(String token) {
+	String email = jwtTokenProvider.getUsername(token.substring(7));
+	System.out.println("User: "+ email);
         Optional<User> user = userRepository.findByEmail(email);
 
         return new FenDto(user.get().getFen()); 
-	}
+    }
 
-	public void setFenByUser(FenDto fenDto, String token) {
-		String email = jwtTokenProvider.getUsername(token.substring(7));
+    public void setFenByUser(FenDto fenDto, String token) {
+	String email = jwtTokenProvider.getUsername(token.substring(7));
+	System.out.println("User: "+ email);
         Optional<User> user = userRepository.findByEmail(email);
         
         String newFen = fenDto.getFen();
@@ -72,9 +74,9 @@ public class ChessService {
         user.get().setFen(newFen);
         userRepository.save(user.get());        
         
-	}
+    }
 	
-public String list_best_moves(FenDto fenDto, String token) throws JsonMappingException, JsonProcessingException {        
+    public String list_best_moves(FenDto fenDto, String token) throws JsonMappingException, JsonProcessingException {        
         
         String email = jwtTokenProvider.getUsername(token.substring(7));
         Optional<User> user = userRepository.findByEmail(email);
