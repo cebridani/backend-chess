@@ -39,19 +39,20 @@ public class ChessService {
 
         StockfishService stockfish = new StockfishService();
         String stockfishPath = "/usr/games/stockfish";
+        
+        String bestMove = "";
 	    
 	if (stockfish.startEngine(stockfishPath)) {
 		
-	    	System.out.println("Stockfish engine started successfully");
-		String bestMove = stockfish.getBestMove(fenDto.getFen(), 15);
+	    System.out.println("Stockfish engine started successfully");
+		bestMove = stockfish.getBestMove(fenDto.getFen(), 15);
 		stockfish.stopEngine();
 
 	} else {
             System.out.println("Failed to start Stockfish engine");
-	    return null;
-        }
+    }
 	    
-        return bestMove;
+		return bestMove;
     }
 
     public FenDto getFenByUser(String token) {
