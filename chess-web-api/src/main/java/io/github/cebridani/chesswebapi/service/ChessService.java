@@ -37,11 +37,20 @@ public class ChessService {
         String email = jwtTokenProvider.getUsername(token.substring(7));
         Optional<User> user = userRepository.findByEmail(email);
 
-        Stockfish stockfish = new Stockfish();
+        StockfishService stockfish = new StockfishService();
         String stockfishPath = "/usr/games/stockfish";
 	    
-	String bestMove = stockfish.getBestMove(fenDto.getFen(), 15);
+	if (stockfish.startEngine(stockfishPath)) {
+		
+	    	System.out.println("Stockfish engine started successfully");
+		String bestMove = stockfish.getBestMove(fenDto.getFen(), 15);
+		stockfish.stopEngine();
 
+	} else {
+            System.out.println("Failed to start Stockfish engine");
+	    return null;
+        }
+	    
         return bestMove;
     }
 
