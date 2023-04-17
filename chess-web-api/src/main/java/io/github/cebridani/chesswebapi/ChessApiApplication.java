@@ -1,7 +1,5 @@
 package io.github.cebridani.chesswebapi;
 
-import java.io.IOException;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -11,16 +9,32 @@ import io.github.cebridani.chesswebapi.service.StockfishService;
 public class ChessApiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ChessApiApplication.class, args);
 		
-		StockfishService stockfish = new StockfishService();
-		try {
-			stockfish.start();
-			System.out.println(stockfish.sendCommand("ucinewgame"));
-			System.out.println(stockfish.sendCommand("go movetime 1000"));
-			stockfish.stop();
-		} catch (IOException e) {
-			System.out.println(e);
+		if (stockfish.startEngine(stockfishPath)) {
+		    System.out.println("Stockfish engine started successfully");
+
+		    stockfish.sendCommand("uci");
+		    System.out.println(stockfish.getOutput(1000));
+
+		    stockfish.sendCommand("setoption name Threads value 2");
+		    stockfish.sendCommand("isready");
+		    System.out.println(stockfish.getOutput(1000));
+
+		    stockfish.sendCommand("ucinewgame");
+		    stockfish.sendCommand("position startpos");
+		    stockfish.sendCommand("go depth 15");
+		    System.out.println(stockfish.getOutput(5000));
+
+		    String initialFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+		    int searchDepth = 15;
+		    String bestMove = stockfish.getBestMove(initialFEN, searchDepth);
+		    System.out.println(bestMove);
+
+		    stockfish.stopEngine();
+		} else {
+		    System.out.println("Failed to start Stockfish engine");
 		}
+		
+		SpringApplication.run(ChessApiApplication.class, args);
 	}
 }
