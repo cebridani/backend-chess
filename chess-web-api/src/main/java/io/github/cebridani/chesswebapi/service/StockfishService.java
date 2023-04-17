@@ -12,7 +12,8 @@ public class StockfishService {
     private BufferedReader in;
 
     public void start() throws IOException {
-        ProcessBuilder processBuilder = new ProcessBuilder("stockfish");
+        String stockfishPath = "/usr/games/stockfish";
+        ProcessBuilder processBuilder = new ProcessBuilder(stockfishPath);
         stockfishProcess = processBuilder.start();
         out = new PrintWriter(stockfishProcess.getOutputStream(), true);
         in = new BufferedReader(new InputStreamReader(stockfishProcess.getInputStream()));
