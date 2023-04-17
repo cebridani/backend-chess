@@ -46,6 +46,7 @@ public class ChessService {
 		
 	    System.out.println("Stockfish engine started successfully");
 		bestMove = stockfish.getBestMove(fenDto.getFen(), 15);
+		System.out.println(bestMove);
 		stockfish.stopEngine();
 
 	} else {
