@@ -37,23 +37,12 @@ public class ChessService {
         String email = jwtTokenProvider.getUsername(token.substring(7));
         Optional<User> user = userRepository.findByEmail(email);
 
-        RestTemplate restTemplate = new RestTemplate();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<FenDto> entity = new HttpEntity<>(fenDto, headers);
+        Stockfish stockfish = new Stockfish();
+        String stockfishPath = "/usr/games/stockfish";
+	    
+	String bestMove = stockfish.getBestMove(fenDto.getFen(), 15);
 
-        ResponseEntity<String> response = restTemplate.postForEntity("http://127.0.0.1:5000/best_move", entity, String.class);
-        String responseBody = response.getBody();
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        Map<String, Object> responseMap = objectMapper.readValue(responseBody, new TypeReference<Map<String, Object>>() {});
-
-        String newFen = (String) responseMap.get("fen");
-        
-        user.get().setFen(newFen);
-        userRepository.save(user.get());
-
-        return responseBody;
+        return bestMove;
     }
 
     public FenDto getFenByUser(String token) {
