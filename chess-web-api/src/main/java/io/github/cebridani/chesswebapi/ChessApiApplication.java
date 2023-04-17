@@ -10,6 +10,9 @@ public class ChessApiApplication {
 
 	public static void main(String[] args) {
 		
+		StockfishService stockfish = new StockfishService();
+       		String stockfishPath = "/usr/games/stockfish";
+		
 		if (stockfish.startEngine(stockfishPath)) {
 		    System.out.println("Stockfish engine started successfully");
 
