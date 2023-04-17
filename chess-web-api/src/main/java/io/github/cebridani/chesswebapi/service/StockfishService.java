@@ -12,9 +12,7 @@ public class StockfishService {
     private BufferedReader in;
 
     public void start() throws IOException {
-        // Cambia la ruta al ejecutable de Stockfish en tu sistema
-        String stockfishPath = "C:/Chess/Stockfish/stockfish_15_win_x64_avx2";
-        ProcessBuilder processBuilder = new ProcessBuilder(stockfishPath);
+        ProcessBuilder processBuilder = new ProcessBuilder("stockfish");
         stockfishProcess = processBuilder.start();
         out = new PrintWriter(stockfishProcess.getOutputStream(), true);
         in = new BufferedReader(new InputStreamReader(stockfishProcess.getInputStream()));
