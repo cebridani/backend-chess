@@ -20,7 +20,7 @@ public class ChessApiApplication {
 			System.out.println(stockfish.sendCommand("go movetime 1000"));
 			stockfish.stop();
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println(e);
 		}
 	}
 }
