@@ -57,6 +57,7 @@ public class StockfishService {
     }
     
     public String getBestMove(String fen, int searchDepth) {
+        sendCommand("setoption name UCI_Chess960 value false");
         sendCommand("position fen " + fen);
         sendCommand("go depth " + searchDepth);
         String output = getOutput(5000);
