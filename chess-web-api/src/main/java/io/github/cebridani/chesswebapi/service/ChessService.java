@@ -44,7 +44,7 @@ public class ChessService {
         Optional<User> user = userRepository.findByEmail(email);
 
         StockfishService stockfish = new StockfishService();
-        String stockfishPath = "C:/Chess/Stockfish/stockfish_15_win_x64_avx2/stockfish_15_x64_avx2";
+        String stockfishPath = "/usr/games/stockfish";
         
         String bestMove = "";
 	    
@@ -141,7 +141,7 @@ public class ChessService {
         Optional<User> user = userRepository.findByEmail(email);
 
         StockfishService stockfish = new StockfishService();
-        String stockfishPath = "C:/Chess/Stockfish/stockfish_15_win_x64_avx2/stockfish_15_x64_avx2";
+        String stockfishPath = "/usr/games/stockfish";
         
         List<String> bestMoves = new ArrayList<>();
         
@@ -166,7 +166,7 @@ public class ChessService {
         Optional<User> user = userRepository.findByEmail(email);
             
         StockfishService stockfish = new StockfishService();
-        String stockfishPath = "C:/Chess/Stockfish/stockfish_15_win_x64_avx2/stockfish_15_x64_avx2";
+        String stockfishPath = "/usr/games/stockfish";
                 
         if (stockfish.startEngine(stockfishPath)) {
         	System.out.println("Stockfish engine started successfully");
@@ -185,7 +185,7 @@ public class ChessService {
         Optional<User> user = userRepository.findByEmail(email);
             
         StockfishService stockfish = new StockfishService();
-        String stockfishPath = "C:/Chess/Stockfish/stockfish_15_win_x64_avx2/stockfish_15_x64_avx2";
+        String stockfishPath = "/usr/games/stockfish";
                 
         if (stockfish.startEngine(stockfishPath)) {
         	System.out.println("Stockfish engine started successfully");
