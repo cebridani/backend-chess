@@ -58,16 +58,20 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public String register(RegisterDto registerDto) {
+    	try {
+    		// add check for username exists in database
+            if(userRepository.existsByUsername(registerDto.getUsername())){
+                throw new ChessAPIException(HttpStatus.BAD_REQUEST, "User already exists!.");
+            }
 
-        // add check for username exists in database
-        if(userRepository.existsByUsername(registerDto.getUsername())){
-            throw new ChessAPIException(HttpStatus.BAD_REQUEST, "User already exists!.");
-        }
-
-        // add check for email exists in database
-        if(userRepository.existsByEmail(registerDto.getEmail())){
-            throw new ChessAPIException(HttpStatus.BAD_REQUEST, "Email is already exists!.");
-        }
+            // add check for email exists in database
+            if(userRepository.existsByEmail(registerDto.getEmail())){
+                throw new ChessAPIException(HttpStatus.BAD_REQUEST, "Email is already exists!.");
+            }
+    	}catch(Exception e) {
+    		return HttpStatus.BAD_REQUEST.toString();
+    	}
+        
 
         User user = new User();
         user.setName(registerDto.getName());
