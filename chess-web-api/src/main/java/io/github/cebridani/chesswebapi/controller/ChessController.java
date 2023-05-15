@@ -29,7 +29,7 @@ public class ChessController {
         this.chessService = chessService;
     }
     
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "http://192.168.49.2:31621")
     @PostMapping("/get_best_move")
     public ResponseEntity<String> sendFen(@RequestBody Move move, @RequestHeader("Authorization") String token) throws JsonMappingException, JsonProcessingException {
         System.out.println(move.toString());
@@ -37,7 +37,7 @@ public class ChessController {
         return ResponseEntity.ok(bestMove);
     }
     
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "http://192.168.49.2:31621")
     @GetMapping("/get_fen")
     public ResponseEntity<Move> getFen(@RequestHeader("Authorization") String token) {
         System.out.println("get Fen");
@@ -45,7 +45,7 @@ public class ChessController {
         return ResponseEntity.ok(fenByUser);
     }
     
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "http://192.168.49.2:31621")
     @PostMapping("/set_fen")
     public ResponseEntity<String> setFen(@RequestBody String body, @RequestHeader("Authorization") String token) {
     	ObjectMapper mapper = new ObjectMapper();
@@ -63,7 +63,7 @@ public class ChessController {
         return ResponseEntity.ok("Fen setted");
     }
     
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "http://192.168.49.2:31621")
     @PostMapping("/top_moves")
     public ResponseEntity<List<String>> top_moves(@RequestBody String fen, @RequestHeader("Authorization") String token) throws JsonMappingException, JsonProcessingException {
     	System.out.println("top moves");
@@ -72,7 +72,7 @@ public class ChessController {
         return ResponseEntity.ok(response);
     }
     
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "http://192.168.49.2:31621")
     @PostMapping("/get_evaluation")
     public ResponseEntity<String> get_evaluation(@RequestBody String fen, @RequestHeader("Authorization") String token) throws JsonMappingException, JsonProcessingException {
     	System.out.println("evaluation");
@@ -81,14 +81,14 @@ public class ChessController {
         return ResponseEntity.ok(response);
     }
     
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "http://192.168.49.2:31621")
     @PostMapping("/get_stadistics")
     public ResponseEntity<String> get_stadistics(@RequestBody String fen, @RequestHeader("Authorization") String token) throws JsonMappingException, JsonProcessingException {
         String response = chessService.get_stadistics(fen, token);
         return ResponseEntity.ok(response);
     }
     
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "http://192.168.49.2:31621")
     @GetMapping("/get_pgn")
     public ResponseEntity<String> get_pgn(@RequestHeader("Authorization") String token) throws JsonMappingException, JsonProcessingException {
         String response = chessService.getPgnByUser(token);
@@ -96,7 +96,7 @@ public class ChessController {
         return ResponseEntity.ok(response);
     }
     
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "http://192.168.49.2:31621")
     @PostMapping("/set_pgn")
     public ResponseEntity<String> set_pgn(@RequestBody Optional<String> pgn, @RequestHeader("Authorization") String token) throws JsonMappingException, JsonProcessingException {
         chessService.savePgnByUser(token, pgn.orElse(""));
