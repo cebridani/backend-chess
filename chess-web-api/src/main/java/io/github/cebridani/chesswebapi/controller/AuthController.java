@@ -26,7 +26,7 @@ public class AuthController {
     }
 
     // Build Login REST API
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "http://192.168.49.2:31621")
     @PostMapping(value = {"/login", "/signin"})
     public ResponseEntity<JWTAuthResponse> login(@RequestBody LoginDto loginDto){
     	String token = authService.login(loginDto);
@@ -40,7 +40,7 @@ public class AuthController {
     }
 
     // Build Register REST API
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "http://192.168.49.2:31621")
     @PostMapping(value = {"/register", "/signup"})
     public ResponseEntity<String> register(@RequestBody RegisterDto registerDto){
         String response = authService.register(registerDto);
