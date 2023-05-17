@@ -18,13 +18,6 @@ spec:
         image: cebridani/backend-chess:latest
         ports:
         - containerPort: 80
-        env:
-        - name: SPRING_DATASOURCE_URL
-          value: jdbc:mysql://mysql:3306/chess?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
-        - name: SPRING_DATASOURCE_USERNAME
-          value: chess
-        - name: SPRING_DATASOURCE_PASSWORD
-          value: root
 ---
 apiVersion: v1
 kind: Service
