@@ -17,7 +17,7 @@ spec:
       - name: backend-chess
         image: cebridani/backend-chess:latest
         ports:
-        - containerPort: 80
+        - containerPort: 5000
 ---
 apiVersion: v1
 kind: Service
