@@ -82,6 +82,6 @@ public class AuthServiceImpl implements AuthService {
 
         userRepository.save(user);
 
-        return "User registered successfully!.";
+         return ResponseEntity.created(null).body("User registered successfully!");
     }
 }
