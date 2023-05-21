@@ -42,15 +42,12 @@ public class AuthController {
     }
 
     // Build Register REST API
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
-    @PostMapping(value = {"/register", "/signup"})
-    public ResponseEntity<String> register(@RequestBody RegisterDto registerDto){
-        String response = authService.register(registerDto);
-        if(response == HttpStatus.BAD_REQUEST.toString()) {
-        	return (ResponseEntity<String>) ResponseEntity.badRequest();
-        }
-        return ResponseEntity.ok(response);
-    }
+   @CrossOrigin(origins = "*", allowedHeaders = "*")
+@PostMapping(value = {"/register", "/signup"})
+public ResponseEntity<String> register(@RequestBody RegisterDto registerDto){
+    return authService.register(registerDto);
+}
+
     
     @CrossOrigin
     @GetMapping(value = {"/hola_mundo"})
