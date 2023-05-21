@@ -6,5 +6,5 @@ import io.github.cebridani.chesswebapi.payload.RegisterDto;
 public interface AuthService {
 	public String login(LoginDto loginDto);
 
-     public ResponseEntity<String> register(RegisterDto registerDto)
+     public ResponseEntity<String> register(RegisterDto registerDto);
 }
