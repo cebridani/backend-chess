@@ -1,5 +1,6 @@
 package io.github.cebridani.chesswebapi.controller;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,7 +27,7 @@ public class AuthController {
     }
 
     // Build Login REST API
-    @CrossOrigin(origins = "http://192.168.49.2:31621")
+    @CrossOrigin
     @PostMapping(value = {"/login", "/signin"})
     public ResponseEntity<JWTAuthResponse> login(@RequestBody LoginDto loginDto){
     	String token = authService.login(loginDto);
@@ -36,11 +37,12 @@ public class AuthController {
         
         System.out.println("User login");
 
+    
         return ResponseEntity.ok(jwtAuthResponse);
     }
 
     // Build Register REST API
-    @CrossOrigin(origins = "http://192.168.49.2:31621")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping(value = {"/register", "/signup"})
     public ResponseEntity<String> register(@RequestBody RegisterDto registerDto){
         String response = authService.register(registerDto);
@@ -50,7 +52,8 @@ public class AuthController {
         return ResponseEntity.ok(response);
     }
     
-    @PostMapping(value = {"/hola_mundo"})
+    @CrossOrigin
+    @GetMapping(value = {"/hola_mundo"})
     public String helloWorld() {
         return "Hola Mundo";
     }

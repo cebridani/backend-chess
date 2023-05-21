@@ -68,9 +68,9 @@ public class StockfishService {
     public String getBestMove(String fen) {
         sendCommand("setoption name UCI_Chess960 value false");
         sendCommand("position fen " + fen);
-        sendCommand("go movetime 1000");
-        String output = getOutput(1100);
-
+        sendCommand("go depth 15");
+        String output = getOutput(500);
+        System.out.println(output);
         // Encuentra la mejor jugada en la salida del motor
         String bestMoveLine = output.lines()
                 .filter(line -> line.startsWith("bestmove"))
@@ -172,6 +172,9 @@ public class StockfishService {
 
         // Esperar a que el motor calcule y luego obtener la salida.
         String input = getOutput(1000);
+
+        System.out.println("input: ");
+        System.out.println(input);
 
         Map<String, Map<String, String>> boardMap = new HashMap<>();
         String[] positions = {"a", "b", "c", "d", "e", "f", "g", "h"};

@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: backend-chess
-        image: cgcr.io/polar-valor-386820/backend-chess:latest
+        image: gcr.io/polar-valor-386820/backend-chess:latest
         ports:
         - containerPort: 5000
 ---

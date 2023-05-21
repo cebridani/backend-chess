@@ -51,6 +51,7 @@ public class ChessService {
 	if (stockfish.startEngine(stockfishPath)) {
 		
 	    System.out.println("Stockfish engine started successfully");
+        System.out.println(move.getAfter());
 		bestMove = stockfish.getBestMove(move.getAfter());
 		System.out.println(bestMove);
 		stockfish.stopEngine();
