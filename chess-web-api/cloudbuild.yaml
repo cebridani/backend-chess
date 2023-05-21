@@ -1,0 +1,10 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/polar-valor-386820/backend-chess:latest', '.']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/polar-valor-386820/backend-chess:latest']
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['container', 'clusters', 'get-credentials', 'chess-cluster', '--zone', 'europe-southwest1-a', '--project', 'polar-valor-386820']
+- name: 'gcr.io/cloud-builders/kubectl'
+  args: ['rollout', 'restart', 'deployment/backend-chess', '-n', 'chess']
+images: ['gcr.io/polar-valor-386820/backend-chess:latest']
